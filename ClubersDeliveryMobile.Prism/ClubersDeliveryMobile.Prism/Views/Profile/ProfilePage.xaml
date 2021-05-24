@@ -1,0 +1,334 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="ClubersDeliveryMobile.Prism.Views.ProfilePage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:prism="http://prismlibrary.com"
+    xmlns:skiarate="clr-namespace:SkiaRate;assembly=SkiaRate.Forms"
+    Title="{Binding Title}"
+    ios:Page.UseSafeArea="true"
+    prism:ViewModelLocator.AutowireViewModel="True"
+    BackgroundColor="{StaticResource background_page}"
+    Visual="Material">
+    <ScrollView>
+        <AbsoluteLayout>
+            <StackLayout Padding="10">
+                <StackLayout Margin="0,5,0,0" HorizontalOptions="Center">
+                    <Frame
+                        Padding="0"
+                        CornerRadius="20"
+                        HorizontalOptions="Center">
+                        <ffimageloading:CachedImage
+                            Aspect="AspectFill"
+                            CacheDuration="50"
+                            DownsampleToViewSize="true"
+                            ErrorPlaceholder="ErrorImage"
+                            HeightRequest="80"
+                            LoadingPlaceholder="LoaderImage"
+                            RetryCount="3"
+                            RetryDelay="600"
+                            Source="{Binding ProfileInfo.ProfileImageUrl}"
+                            WidthRequest="80" />
+                    </Frame>
+                    <Label
+                        Margin="0,5,0,0"
+                        FontAttributes="Bold"
+                        FontSize="19"
+                        HorizontalTextAlignment="Center"
+                        Text="{Binding ProfileInfo.Name}"
+                        VerticalTextAlignment="End" />
+                    <Frame
+                        Margin="0"
+                        Padding="10,2"
+                        BackgroundColor="{StaticResource cluberspink}"
+                        CornerRadius="6"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center">
+                        <Grid
+                            Margin="0,0,0,0"
+                            ColumnDefinitions="Auto, Auto"
+                            RowDefinitions="Auto"
+                            VerticalOptions="Center">
+                            <skiarate:RatingView
+                                Grid.Column="0"
+                                Margin="0,0,-20,0"
+                                ColorOn="White"
+                                Count="1"
+                                HeightRequest="1"
+                                RatingType="Full"
+                                Value="1" />
+                            <Label
+                                Grid.Column="1"
+                                Margin="-5,0,1,0"
+                                FontSize="Micro"
+                                HorizontalOptions="Start"
+                                HorizontalTextAlignment="Start"
+                                Text="{Binding ProfileInfo.Score}"
+                                TextColor="White"
+                                VerticalOptions="Center" />
+                        </Grid>
+                    </Frame>
+                </StackLayout>
+                <Label
+                    Margin="10,0,10,5"
+                    FontAttributes="Bold"
+                    FontSize="15"
+                    Text="Mi cuenta" />
+                <Frame
+                    Margin="10,0"
+                    Padding="0"
+                    CornerRadius="10">
+                    <StackLayout>
+                        <StackLayout Padding="5,5,5,0" Orientation="Horizontal">
+                            <Label Margin="5,0" Text="Número de teléfono" />
+                            <Label
+                                Margin="5,0"
+                                FontSize="12"
+                                HorizontalOptions="EndAndExpand"
+                                Text="{Binding ProfileInfo.PhoneNumber}"
+                                TextColor="{StaticResource secondary_text}" />
+                        </StackLayout>
+                        <BoxView
+                            HeightRequest="1"
+                            HorizontalOptions="FillAndExpand"
+                            Color="LightGray" />
+                        <StackLayout Padding="5,0,5,0" Orientation="Horizontal">
+                            <Label Margin="5,0" Text="Email" />
+                            <Label
+                                Margin="5,0"
+                                FontSize="12"
+                                HorizontalOptions="EndAndExpand"
+                                Text="{Binding ProfileInfo.Email}"
+                                TextColor="{StaticResource secondary_text}" />
+                        </StackLayout>
+                        <BoxView
+                            HeightRequest="1"
+                            HorizontalOptions="FillAndExpand"
+                            Color="LightGray" />
+                        <StackLayout Padding="5,0,5,0" Orientation="Horizontal">
+                            <Label Margin="5,0" Text="GPS" />
+                            <Label
+                                Margin="5,0"
+                                FontSize="12"
+                                HorizontalOptions="EndAndExpand"
+                                Text="Activo"
+                                TextColor="{StaticResource secondary_text}" />
+                        </StackLayout>
+                        <BoxView
+                            HeightRequest="1"
+                            HorizontalOptions="FillAndExpand"
+                            Color="LightGray" />
+                        <StackLayout Padding="5,0,5,0" Orientation="Horizontal">
+                            <Label Margin="5,0" Text="Tipo de vehículo" />
+                            <Label
+                                Margin="5,0"
+                                FontSize="12"
+                                HorizontalOptions="EndAndExpand"
+                                Text="{Binding ProfileInfo.VehicleType}"
+                                TextColor="{StaticResource secondary_text}" />
+                        </StackLayout>
+                        <BoxView
+                            HeightRequest="1"
+                            HorizontalOptions="FillAndExpand"
+                            Color="LightGray" />
+                        <StackLayout Padding="5,0,5,5" Orientation="Horizontal">
+                            <Label Margin="5,0" Text="Tipo de maleta" />
+                            <Label
+                                Margin="5,0"
+                                FontSize="12"
+                                HorizontalOptions="EndAndExpand"
+                                Text="{Binding ProfileInfo.TypeOfSuitcase}"
+                                TextColor="{StaticResource secondary_text}" />
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+                <Label
+                    Margin="10,5"
+                    FontAttributes="Bold"
+                    FontSize="15"
+                    Text="Depósitos" />
+                <Frame
+                    Margin="10,0"
+                    Padding="35,15"
+                    CornerRadius="10">
+                    <StackLayout Spacing="15">
+                        <Label Text="Número de tarjeta o cuenta" TextColor="{StaticResource secondary_text}" />
+                        <Label FontSize="13" Text="VISA **** 2375" />
+                    </StackLayout>
+                </Frame>
+                <Frame
+                    Margin="10,0,10,7"
+                    Padding="0,13"
+                    CornerRadius="10"
+                    HasShadow="False">
+                    <StackLayout Spacing="15">
+                        <Label
+                            FontSize="13"
+                            HorizontalOptions="Center"
+                            Text="Porcentaje de pedidos" />
+                        <Button
+                            BackgroundColor="Transparent"
+                            BorderColor="{StaticResource cluberspink}"
+                            BorderWidth="1"
+                            CornerRadius="30"
+                            FontSize="13"
+                            HeightRequest="60"
+                            HorizontalOptions="Center"
+                            Text="{Binding ProfileInfo.PercentageOrders}"
+                            TextColor="{StaticResource cluberspink}"
+                            VerticalOptions="Center"
+                            WidthRequest="60" />
+                        <StackLayout HorizontalOptions="Center" Orientation="Horizontal">
+                            <Label
+                                FontSize="12"
+                                HorizontalTextAlignment="Center"
+                                Text="Porcentaje de pedidos tomados en los ultimos"
+                                TextColor="{StaticResource secondary_text}" />
+                            <Label
+                                Margin="-3,0,0,0"
+                                FontSize="12"
+                                HorizontalTextAlignment="Center"
+                                Text="7 días"
+                                TextColor="{StaticResource secondary_text}"
+                                TextDecorations="Underline" />
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+                <Grid
+                    Margin="9,0,4,0"
+                    Padding="0"
+                    ColumnDefinitions="*,*,*"
+                    HorizontalOptions="Center"
+                    RowDefinitions="Auto,Auto">
+                    <Frame
+                        Padding="43,5"
+                        CornerRadius="7"
+                        HorizontalOptions="Center">
+                        <Label
+                            FontAttributes="Bold"
+                            HorizontalTextAlignment="Center"
+                            Text="{Binding ProfileInfo.NotifiedOrders}" />
+                    </Frame>
+                    <Frame
+                        Grid.Column="1"
+                        Padding="43,5"
+                        CornerRadius="7"
+                        HorizontalOptions="Center">
+                        <Label
+                            FontAttributes="Bold"
+                            HorizontalTextAlignment="Center"
+                            Text="{Binding ProfileInfo.OrdersTaken}" />
+                    </Frame>
+                    <Frame
+                        Grid.Column="2"
+                        Padding="43,5"
+                        BackgroundColor="WhiteSmoke"
+                        CornerRadius="7"
+                        HorizontalOptions="Center">
+                        <Label
+                            FontAttributes="Bold"
+                            HorizontalTextAlignment="Center"
+                            Text="{Binding ProfileInfo.RejectedOrders}" />
+                    </Frame>
+                    <Label
+                        Grid.Row="1"
+                        FontSize="12"
+                        HorizontalTextAlignment="Center"
+                        Text="Notificados" />
+                    <Label
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        FontSize="12"
+                        HorizontalTextAlignment="Center"
+                        Text="Tomados" />
+                    <Label
+                        Grid.Row="1"
+                        Grid.Column="2"
+                        FontSize="12"
+                        HorizontalTextAlignment="Center"
+                        Text="Rechazados" />
+                </Grid>
+                <StackLayout Padding="12,12,12,0">
+                    <Label
+                        Margin="0,0,0,5"
+                        FontAttributes="Bold"
+                        FontSize="13"
+                        Text="Beneficios por tener alto % de pedidos tomados" />
+                    <StackLayout Orientation="Horizontal">
+                        <Label
+                            Margin="40,0,0,0"
+                            FontFamily="{StaticResource MaterialFontFamily}"
+                            FontSize="15"
+                            HorizontalTextAlignment="Center"
+                            Text="{Binding CheckIcon}"
+                            TextColor="{StaticResource cluberspink}"
+                            VerticalOptions="Center"
+                            VerticalTextAlignment="Center" />
+                        <Label
+                            Margin="7,0"
+                            FontSize="12"
+                            Text="Mejores comisiones" />
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label
+                            Margin="40,0,0,0"
+                            FontFamily="{StaticResource MaterialFontFamily}"
+                            FontSize="15"
+                            HorizontalTextAlignment="Center"
+                            Text="{Binding CheckIcon}"
+                            TextColor="{StaticResource cluberspink}"
+                            VerticalOptions="Center"
+                            VerticalTextAlignment="Center" />
+                        <Label
+                            Margin="7,0"
+                            FontSize="12"
+                            Text="Te asignamos más entregas" />
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label
+                            Margin="40,0,0,0"
+                            FontFamily="{StaticResource MaterialFontFamily}"
+                            FontSize="15"
+                            HorizontalTextAlignment="Center"
+                            Text="{Binding CheckIcon}"
+                            TextColor="{StaticResource cluberspink}"
+                            VerticalOptions="Center"
+                            VerticalTextAlignment="Center" />
+                        <Label
+                            Margin="7,0"
+                            FontSize="12"
+                            Text="Calificas para participar" />
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label
+                            Margin="40,0,0,0"
+                            FontFamily="{StaticResource MaterialFontFamily}"
+                            FontSize="15"
+                            HorizontalTextAlignment="Center"
+                            Text="{Binding CheckIcon}"
+                            TextColor="{StaticResource cluberspink}"
+                            VerticalOptions="Center"
+                            VerticalTextAlignment="Center" />
+                        <Label
+                            Margin="7,0"
+                            FontSize="12"
+                            Text="Subes de categoria" />
+                    </StackLayout>
+                </StackLayout>
+                <StackLayout Padding="10,15,10,0">
+                    <Button Command="{Binding GoToHistoryCommand}" Text="Historial de pedidos" />
+                </StackLayout>
+            </StackLayout>
+            <ActivityIndicator
+                AbsoluteLayout.LayoutBounds=".5,.5,.5,.5"
+                AbsoluteLayout.LayoutFlags="All"
+                HorizontalOptions="Center"
+                IsRunning="{Binding IsRunning}"
+                IsVisible="{Binding IsRunning}"
+                VerticalOptions="Center"
+                Color="{StaticResource cluberspink}" />
+        </AbsoluteLayout>
+    </ScrollView>
+</ContentPage>

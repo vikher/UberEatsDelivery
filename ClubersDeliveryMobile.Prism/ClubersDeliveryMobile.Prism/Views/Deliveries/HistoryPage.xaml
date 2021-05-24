@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="ClubersDeliveryMobile.Prism.Views.HistoryPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:local="clr-namespace:ClubersDeliveryMobile.Prism.Converters"
+    xmlns:prism="http://prismlibrary.com"
+    x:Name="historypage"
+    Title="{Binding Title}"
+    ios:Page.UseSafeArea="true"
+    prism:ViewModelLocator.AutowireViewModel="True"
+    Visual="Material">
+    <Page.Resources>
+        <local:ToUpperValueConverter x:Key="ToUpperValueConverter" />
+        <local:DateToStringValueConverter x:Key="DateToStringValueConverter" />
+    </Page.Resources>
+    <AbsoluteLayout>
+        <StackLayout Padding="20">
+            <CollectionView IsGrouped="true" ItemsSource="{Binding DeliveriesGrouped}">
+                <CollectionView.GroupHeaderTemplate>
+                    <DataTemplate>
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="12"
+                            Text="{Binding Key, Converter={StaticResource DateToStringValueConverter}, StringFormat='{0:d MMMM yyyy}'}" />
+                    </DataTemplate>
+                </CollectionView.GroupHeaderTemplate>
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical" VerticalItemSpacing="10" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.EmptyView>
+                    <StackLayout>
+                        <Label
+                            Margin="10,25,10,10"
+                            FontAttributes="Bold"
+                            FontSize="18"
+                            HorizontalOptions="Fill"
+                            HorizontalTextAlignment="Center"
+                            Text="No hay nuevas entregas " />
+                    </StackLayout>
+                </CollectionView.EmptyView>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame
+                            Padding="7,1"
+                            CornerRadius="10"
+                            HasShadow="False">
+                            <Grid
+                                Padding="10"
+                                ColumnDefinitions="20, Auto, *, Auto"
+                                RowDefinitions="Auto,Auto">
+                                <Label
+                                    Grid.RowSpan="2"
+                                    FontFamily="{StaticResource MaterialFontFamily}"
+                                    FontSize="15"
+                                    HorizontalTextAlignment="Center"
+                                    Text="{Binding Source={x:Reference historypage}, Path=BindingContext.CheckIcon}"
+                                    TextColor="{StaticResource cluberspink}"
+                                    VerticalOptions="Center"
+                                    VerticalTextAlignment="Center" />
+                                <Label
+                                    Grid.RowSpan="2"
+                                    Grid.Column="1"
+                                    Text="{Binding Status}"
+                                    VerticalOptions="Center"
+                                    VerticalTextAlignment="Center" />
+                                <Label
+                                    Grid.RowSpan="2"
+                                    Grid.Column="2"
+                                    Margin="10,0,0,0"
+                                    Text="{Binding OrderId}"
+                                    VerticalOptions="Center"
+                                    VerticalTextAlignment="Center" />
+                                <Label
+                                    Grid.Column="3"
+                                    FontSize="Micro"
+                                    HorizontalOptions="Center"
+                                    Text="{Binding StartDate, StringFormat='{0:h:mm tt}'}"
+                                    TextColor="{StaticResource secondary_text}" />
+                                <Label
+                                    Grid.Row="1"
+                                    Grid.Column="3"
+                                    FontAttributes="Bold"
+                                    FontSize="14"
+                                    HorizontalOptions="Center"
+                                    Text="{Binding TotalOrder, StringFormat='{0:C}'}" />
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+        <ActivityIndicator
+            AbsoluteLayout.LayoutBounds=".5,.5,.5,.5"
+            AbsoluteLayout.LayoutFlags="All"
+            HorizontalOptions="Center"
+            IsRunning="{Binding IsRunning}"
+            IsVisible="{Binding IsRunning}"
+            VerticalOptions="Center"
+            Color="{StaticResource cluberspink}" />
+    </AbsoluteLayout>
+</ContentPage>

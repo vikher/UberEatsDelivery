@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<MasterDetailPage
+    x:Class="ClubersDeliveryMobile.Prism.Views.DeliveryMasterDetailPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:prism="http://prismlibrary.com"
+    ios:Page.UseSafeArea="true"
+    prism:ViewModelLocator.AutowireViewModel="True"
+    Visual="Material">
+
+    <MasterDetailPage.Master>
+        <ContentPage Title="&#x2630;" BackgroundColor="{StaticResource cluberspink}">
+            <StackLayout>
+                <Grid
+                    Margin="20,35,10,15"
+                    ColumnDefinitions="Auto,*"
+                    RowDefinitions="Auto,Auto">
+                    <Frame
+                        Grid.RowSpan="2"
+                        Padding="0"
+                        CornerRadius="20">
+                        <ffimageloading:CachedImage
+                            Aspect="AspectFill"
+                            CacheDuration="50"
+                            DownsampleToViewSize="true"
+                            ErrorPlaceholder="ErrorImage"
+                            HeightRequest="62"
+                            LoadingPlaceholder="LoaderImage"
+                            RetryCount="3"
+                            RetryDelay="600"
+                            Source="https://clubersblob.blob.core.windows.net/users/profile.jpg"
+                            WidthRequest="62" />
+                    </Frame>
+                    <Label
+                        Grid.Column="1"
+                        Margin="10,6,0,0"
+                        FontAttributes="Bold"
+                        FontSize="Medium"
+                        HorizontalTextAlignment="Start"
+                        Text="{Binding User.Result.FullName}"
+                        TextColor="White"
+                        VerticalTextAlignment="End" />
+                    <Label
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Margin="10,0,0,0"
+                        FontSize="Small"
+                        HorizontalTextAlignment="Start"
+                        Text="Nivel 5"
+                        TextColor="White"
+                        VerticalTextAlignment="Start" />
+                </Grid>
+                <Image
+                    Margin="20,10,0,0"
+                    HeightRequest="35"
+                    HorizontalOptions="Start"
+                    Source="LogoClubersNegativo.png"
+                    VerticalOptions="Center" />
+                <StackLayout Padding="20">
+                    <ListView
+                        BackgroundColor="Transparent"
+                        HasUnevenRows="True"
+                        ItemsSource="{Binding Menus}"
+                        SeparatorVisibility="None">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Grid
+                                        Margin="6,0,0,0"
+                                        HeightRequest="55"
+                                        RowSpacing="10">
+                                        <Grid.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding SelectMenuCommand}" />
+                                        </Grid.GestureRecognizers>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Label
+                                            FontFamily="{StaticResource MaterialFontFamily}"
+                                            FontSize="Medium"
+                                            Text="{Binding Icon}"
+                                            TextColor="White"
+                                            VerticalOptions="CenterAndExpand"
+                                            VerticalTextAlignment="Center" />
+                                        <Label
+                                            Grid.Column="1"
+                                            FontAttributes="Bold"
+                                            FontSize="16"
+                                            Text="{Binding Title}"
+                                            TextColor="White"
+                                            VerticalOptions="Center" />
+                                    </Grid>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackLayout>
+
+            </StackLayout>
+
+        </ContentPage>
+
+    </MasterDetailPage.Master>
+
+</MasterDetailPage>

@@ -1,0 +1,214 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="ClubersDeliveryMobile.Prism.Views.EarningsPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:ClubersDeliveryMobile.Prism.Converters"
+    xmlns:prism="http://prismlibrary.com"
+    Title="{Binding Title}"
+    prism:ViewModelLocator.AutowireViewModel="True"
+    Visual="Material">
+    <Page.Resources>
+        <local:DateToStringValueConverter x:Key="DateToStringValueConverter" />
+    </Page.Resources>
+    <AbsoluteLayout>
+        <StackLayout Padding="20">
+            <Grid Margin="0,0,0,2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    FontAttributes="Bold"
+                    Text="Fecha inicial" />
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    FontAttributes="Bold"
+                    Text="Fecha final" />
+                <DatePicker
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Date="{Binding StartDate}"
+                    FontSize="Small" />
+                <DatePicker
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Date="{Binding EndDate}"
+                    FontSize="Small" />
+                <Button
+                    Grid.Row="0"
+                    Grid.RowSpan="2"
+                    Grid.Column="2"
+                    Padding="0"
+                    Command="{Binding FilterCommand}"
+                    FontSize="Micro"
+                    Text="consultar" />
+            </Grid>
+
+            <ScrollView>
+                <StackLayout>
+                    <StackLayout x:Name="dia">
+                        <CollectionView IsGrouped="true" ItemsSource="{Binding EarningsGrouped}">
+                            <CollectionView.GroupHeaderTemplate>
+                                <DataTemplate>
+                                    <Label
+                                        FontAttributes="Bold"
+                                        FontSize="12"
+                                        Text="{Binding Key, Converter={StaticResource DateToStringValueConverter}, StringFormat='{0:d MMMM yyyy}'}" />
+                                </DataTemplate>
+                            </CollectionView.GroupHeaderTemplate>
+                            <CollectionView.ItemsLayout>
+                                <GridItemsLayout Orientation="Vertical" VerticalItemSpacing="10" />
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.EmptyView>
+                                <StackLayout>
+                                    <Label
+                                        Margin="10,25,10,10"
+                                        FontAttributes="Bold"
+                                        FontSize="18"
+                                        HorizontalOptions="Fill"
+                                        HorizontalTextAlignment="Center"
+                                        Text="No hay nuevas ganancias " />
+                                </StackLayout>
+                            </CollectionView.EmptyView>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Frame
+                                        Padding="20,10"
+                                        CornerRadius="10"
+                                        HasShadow="False">
+                                        <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto">
+                                            <Label
+                                                Grid.RowSpan="2"
+                                                Text="{Binding Concept}"
+                                                VerticalOptions="Center"
+                                                VerticalTextAlignment="Center" />
+                                            <Label
+                                                Grid.Column="1"
+                                                FontSize="Micro"
+                                                HorizontalOptions="End"
+                                                Text="{Binding Created, StringFormat='{0:h:mm tt}'}"
+                                                TextColor="{StaticResource secondary_text}" />
+                                            <Label
+                                                Grid.Row="1"
+                                                Grid.Column="1"
+                                                FontAttributes="Bold"
+                                                HorizontalTextAlignment="End"
+                                                Text="{Binding Amount, StringFormat='{0:C}'}" />
+                                        </Grid>
+                                    </Frame>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </StackLayout>
+
+                    <StackLayout
+                        x:Name="semana"
+                        BindableLayout.ItemsSource="{Binding Transactions}"
+                        IsVisible="False">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+                                <Expander
+                                    CollapseAnimationEasing="{x:Static Easing.CubicOut}"
+                                    CollapseAnimationLength="500"
+                                    ExpandAnimationEasing="{x:Static Easing.CubicIn}"
+                                    ExpandAnimationLength="500">
+                                    <Expander.Header>
+                                        <Grid>
+                                            <Label
+                                                FontAttributes="Bold"
+                                                FontSize="Medium"
+                                                Text="{Binding Date}" />
+                                            <Image
+                                                HorizontalOptions="End"
+                                                Source="expand.png"
+                                                VerticalOptions="Start">
+                                                <Image.Triggers>
+                                                    <DataTrigger
+                                                        Binding="{Binding Source={RelativeSource AncestorType={x:Type Expander}}, Path=IsExpanded}"
+                                                        TargetType="Image"
+                                                        Value="True">
+                                                        <Setter Property="Source" Value="collapse.png" />
+                                                    </DataTrigger>
+                                                </Image.Triggers>
+                                            </Image>
+                                        </Grid>
+                                    </Expander.Header>
+                                    <Expander.ContentTemplate>
+                                        <DataTemplate>
+                                            <Frame BorderColor="{StaticResource cluberspink}">
+                                                <Grid Padding="10">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="Auto" />
+                                                        <ColumnDefinition Width="*" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="Auto" />
+                                                        <RowDefinition Height="*" />
+                                                        <RowDefinition Height="Auto" />
+                                                        <RowDefinition Height="*" />
+                                                        <RowDefinition Height="Auto" />
+                                                    </Grid.RowDefinitions>
+                                                    <Label Text="Comision por entregas" />
+                                                    <Label
+                                                        Grid.Column="1"
+                                                        HorizontalTextAlignment="End"
+                                                        Text="{Binding CommissionAmount, StringFormat='{0:C}'}" />
+                                                    <BoxView
+                                                        Grid.Row="1"
+                                                        Grid.ColumnSpan="2"
+                                                        HeightRequest="1"
+                                                        HorizontalOptions="FillAndExpand"
+                                                        Color="{StaticResource cluberspink}" />
+                                                    <Label Grid.Row="2" Text="Propinas" />
+                                                    <Label
+                                                        Grid.Row="2"
+                                                        Grid.Column="1"
+                                                        HorizontalTextAlignment="End"
+                                                        Text="{Binding TipAmount, StringFormat='{0:C}'}" />
+                                                    <BoxView
+                                                        Grid.Row="3"
+                                                        Grid.ColumnSpan="2"
+                                                        HeightRequest="1"
+                                                        HorizontalOptions="FillAndExpand"
+                                                        Color="{StaticResource cluberspink}" />
+                                                    <Label
+                                                        Grid.Row="4"
+                                                        FontAttributes="Italic"
+                                                        Text="TOTAL"
+                                                        TextColor="{StaticResource secondary_text}" />
+                                                    <Label
+                                                        Grid.Row="4"
+                                                        Grid.Column="1"
+                                                        FontAttributes="Italic"
+                                                        HorizontalTextAlignment="End"
+                                                        Text="{Binding EarningsTotal, StringFormat='{0:C}'}" />
+                                                </Grid>
+                                            </Frame>
+                                        </DataTemplate>
+                                    </Expander.ContentTemplate>
+                                </Expander>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </StackLayout>
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+        <ActivityIndicator
+            AbsoluteLayout.LayoutBounds=".5,.5,.5,.5"
+            AbsoluteLayout.LayoutFlags="All"
+            HorizontalOptions="Center"
+            IsRunning="{Binding IsRunning}"
+            IsVisible="{Binding IsRunning}"
+            VerticalOptions="Center"
+            Color="{StaticResource cluberspink}" />
+    </AbsoluteLayout>
+</ContentPage>

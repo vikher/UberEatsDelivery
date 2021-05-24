@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="ClubersDeliveryMobile.Prism.Views.HomePage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
+    xmlns:prism="http://prismlibrary.com" xmlns:local="clr-namespace:ClubersDeliveryMobile.Prism.Behavior"
+    Title="{Binding Title}"
+    ios:Page.UseSafeArea="true"
+    prism:ViewModelLocator.AutowireViewModel="True"
+    NavigationPage.HasNavigationBar="False"
+    Visual="Material">
+    <AbsoluteLayout>
+
+        <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+            <maps:Map x:Name="MyMap" MapType="Street" />
+            <Grid
+                BackgroundColor="{StaticResource cluberspink}"
+                ColumnDefinitions="*, * , *"
+                HeightRequest="100"
+                IsVisible="{Binding IsVisible}"
+                RowDefinitions="*">
+                <Label
+                    Grid.Column="0"
+                    Margin="0,0,15,0"
+                    FontAttributes="Bold"
+                    FontSize="Small"
+                    HorizontalOptions="Center"
+                    Text="Aceptar"
+                    TextColor="White"
+                    VerticalOptions="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ContinueCommand}" />
+                    </Label.GestureRecognizers>
+                </Label>
+                <Ellipse
+                    Grid.Column="1"
+                    HeightRequest="40"
+                    Stroke="White"
+                    StrokeThickness="1"
+                    WidthRequest="40" />
+                <Button
+                    Grid.Column="1"
+                    BorderColor="White"
+                    BorderRadius="20"
+                    CornerRadius="40"
+                    HeightRequest="40"
+                    IsEnabled="False"
+                    Text="{Binding SecondsElapsed}"
+                    WidthRequest="40" />
+                <Label
+                    Grid.Column="2"
+                    Margin="15,0,0,0"
+                    FontAttributes="Bold"
+                    FontSize="Small"
+                    HorizontalOptions="Center"
+                    Text="Rechazar"
+                    TextColor="White"
+                    VerticalOptions="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding RejectCommand}" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </Grid>
+        </StackLayout>
+        <StackLayout
+            Margin="0,6,0,0"
+            AbsoluteLayout.LayoutBounds="0,0,.8,.1"
+            AbsoluteLayout.LayoutFlags="All"
+            Orientation="Horizontal">
+            <Frame
+                Margin="10,0,0,0"
+                Padding="0"
+                CornerRadius="15"
+                HeightRequest="30"
+                VerticalOptions="Center"
+                WidthRequest="30">
+                <Label
+                    Margin="0"
+                    FontFamily="{StaticResource MaterialFontFamily}"
+                    FontSize="Large"
+                    HeightRequest="10"
+                    HorizontalOptions="Center"
+                    Text="{Binding MenuIcon}"
+                    TextColor="{StaticResource cluberspink}"
+                    VerticalTextAlignment="Center" />
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="Handle_Tapped" />
+                </Frame.GestureRecognizers>
+            </Frame>
+            <Switch
+                Margin="30,0,0,0"
+                HorizontalOptions="CenterAndExpand"
+                IsToggled="{Binding IsAvailable, Mode=TwoWay}"
+                OnColor="{StaticResource cluberspink}"
+                ThumbColor="White"
+                VerticalOptions="Center" >
+                <Switch.Behaviors>
+                    <local:SwitchBehavior Command="{Binding ToggledCommand}" />
+                </Switch.Behaviors>
+            </Switch>
+        </StackLayout>
+        <ActivityIndicator
+            AbsoluteLayout.LayoutBounds=".5,.5,.5,.5"
+            AbsoluteLayout.LayoutFlags="All"
+            HorizontalOptions="Center"
+            IsRunning="{Binding IsRunning}"
+            IsVisible="{Binding IsRunning}"
+            VerticalOptions="Center"
+            Color="{StaticResource cluberspink}" />
+    </AbsoluteLayout>
+</ContentPage>

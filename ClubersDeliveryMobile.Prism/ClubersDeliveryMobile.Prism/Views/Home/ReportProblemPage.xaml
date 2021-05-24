@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="ClubersDeliveryMobile.Prism.Views.ReportProblemPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:prism="http://prismlibrary.com"
+    ios:Page.UseSafeArea="true"
+    prism:ViewModelLocator.AutowireViewModel="True"
+    Visual="Material">
+    <StackLayout Padding="20">
+        <Label FontAttributes="Bold" Text="¿Necesitas ayuda?" />
+        <Grid HeightRequest="60" RowSpacing="20">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Label
+                x:Name="PhoneNumberIcon"
+                FontFamily="{StaticResource MaterialFontFamily}"
+                FontSize="Large"
+                VerticalTextAlignment="Center" />
+            <Label
+                Grid.Column="1"
+                Text="Soporte"
+                VerticalOptions="Center" />
+        </Grid>
+        <Label
+            FontAttributes="Bold"
+            HeightRequest="40"
+            Text="¿Cuál es tu problema?" />
+        <Grid RowSpacing="20">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Label
+                x:Name="AlertCircleIcon1"
+                FontFamily="{StaticResource MaterialFontFamily}"
+                FontSize="Large"
+                TextColor="Red"
+                VerticalTextAlignment="Center" />
+            <Label
+                Grid.Column="1"
+                Text="Incapaz de encontrar destinatario"
+                VerticalOptions="Center" />
+            <Label
+                x:Name="AlertCircleIcon2"
+                Grid.Row="1"
+                FontFamily="{StaticResource MaterialFontFamily}"
+                FontSize="Large"
+                TextColor="Red"
+                VerticalTextAlignment="Center" />
+            <Label
+                Grid.Row="1"
+                Grid.Column="1"
+                Text="No hay lugar seguro para entregar"
+                VerticalOptions="Center" />
+            <Label
+                x:Name="AlertCircleIcon3"
+                Grid.Row="2"
+                FontFamily="{StaticResource MaterialFontFamily}"
+                FontSize="Large"
+                TextColor="Red"
+                VerticalTextAlignment="Center" />
+            <Label
+                Grid.Row="2"
+                Grid.Column="1"
+                Text="Articulo perdido"
+                VerticalOptions="Center" />
+            <Label
+                x:Name="AlertCircleIcon4"
+                Grid.Row="3"
+                FontFamily="{StaticResource MaterialFontFamily}"
+                FontSize="Large"
+                TextColor="Red"
+                VerticalTextAlignment="Center" />
+            <Label
+                Grid.Row="3"
+                Grid.Column="1"
+                Text="Articulo dañado"
+                VerticalOptions="Center" />
+            <Label
+                x:Name="AlertCircleIcon5"
+                Grid.Row="4"
+                FontFamily="{StaticResource MaterialFontFamily}"
+                FontSize="Large"
+                TextColor="Red"
+                VerticalTextAlignment="Center" />
+            <Label
+                Grid.Row="4"
+                Grid.Column="1"
+                Text="Otro"
+                VerticalOptions="Center" />
+        </Grid>
+    </StackLayout>
+</ContentPage>

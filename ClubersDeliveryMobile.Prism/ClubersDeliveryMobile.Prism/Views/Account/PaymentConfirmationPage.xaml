@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="ClubersDeliveryMobile.Prism.Views.PaymentConfirmationPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:prism="http://prismlibrary.com"
+    Title="{Binding Title}"
+    prism:ViewModelLocator.AutowireViewModel="True"
+    Visual="Material">
+    <ScrollView>
+        <StackLayout Padding="15,5">
+            <Label
+                Margin="0,10,0,5"
+                FontSize="13"
+                LineBreakMode="WordWrap">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span
+                            FontAttributes="Bold"
+                            FontSize="13"
+                            Text="Límite de cobro en efectivo " />
+                        <Span
+                            FontAttributes="Bold"
+                            FontSize="13"
+                            Text="$200.00" />
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+            <Frame Padding="5,20,5,10" CornerRadius="10">
+                <StackLayout>
+                    <Label
+                        Margin="0,5,0,10"
+                        FontAttributes="Bold"
+                        FontSize="Large"
+                        HorizontalOptions="Center"
+                        HorizontalTextAlignment="Center"
+                        Text="$230.00" />
+                    <Label
+                        FontSize="12"
+                        HorizontalOptions="Center"
+                        HorizontalTextAlignment="Center"
+                        LineBreakMode="WordWrap">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span FontSize="12" Text="Has excedido el límite de cobro por " />
+                                <Span
+                                    FontAttributes="Bold"
+                                    FontSize="12"
+                                    Text="$30.00" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </StackLayout>
+            </Frame>
+            <Label
+                Margin="0,10,0,5"
+                FontAttributes="Bold"
+                FontSize="13"
+                Text="Pagar a" />
+            <Frame
+                Margin="0"
+                Padding="0"
+                CornerRadius="10">
+                <StackLayout>
+                    <StackLayout Padding="5,5,5,0" Orientation="Horizontal">
+                        <Label Margin="15,0" Text="Cuenta bancaria" />
+                        <Label
+                            Margin="15,0"
+                            FontSize="12"
+                            HorizontalOptions="EndAndExpand"
+                            Text="700145821445620"
+                            TextColor="{StaticResource secondary_text}" />
+                    </StackLayout>
+                    <BoxView
+                        HeightRequest="1"
+                        HorizontalOptions="FillAndExpand"
+                        Color="LightGray" />
+                    <StackLayout Padding="5,0,5,0" Orientation="Horizontal">
+                        <Label Margin="15,0" Text="Referencia" />
+                        <Label
+                            Margin="15,0"
+                            FontSize="12"
+                            HorizontalOptions="EndAndExpand"
+                            Text="001115"
+                            TextColor="{StaticResource secondary_text}" />
+                    </StackLayout>
+                    <BoxView
+                        HeightRequest="1"
+                        HorizontalOptions="FillAndExpand"
+                        Color="LightGray" />
+                    <StackLayout Padding="5,0,5,0" Orientation="Horizontal">
+                        <Label Margin="15,0" Text="Beneficiario" />
+                        <Label
+                            Margin="15,0"
+                            FontSize="12"
+                            HorizontalOptions="EndAndExpand"
+                            Text="Reembolsos Clubers"
+                            TextColor="{StaticResource secondary_text}" />
+                    </StackLayout>
+                    <BoxView
+                        HeightRequest="1"
+                        HorizontalOptions="FillAndExpand"
+                        Color="LightGray" />
+                    <StackLayout Padding="5,0,5,5" Orientation="Horizontal">
+                        <Label Margin="15,0" Text="Banco" />
+                        <Label
+                            Margin="15,0"
+                            FontSize="12"
+                            HorizontalOptions="EndAndExpand"
+                            Text="BBVA"
+                            TextColor="{StaticResource secondary_text}" />
+                    </StackLayout>
+
+                </StackLayout>
+            </Frame>
+            <StackLayout VerticalOptions="CenterAndExpand">
+                <Label
+                    FontSize="Micro"
+                    HorizontalOptions="Center"
+                    HorizontalTextAlignment="Center"
+                    Text="IMPORTANTE"
+                    TextColor="{StaticResource secondary_text}" />
+                <Label
+                    FontSize="Micro"
+                    HorizontalOptions="Center"
+                    HorizontalTextAlignment="Center"
+                    Text="Envía foto del comprobante de pago, tu nombre y la referencia."
+                    TextColor="{StaticResource secondary_text}" />
+            </StackLayout>
+            <StackLayout VerticalOptions="EndAndExpand">
+                <Button Command="{Binding ConfirmCommand}" Text="Confirmar pago" />
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

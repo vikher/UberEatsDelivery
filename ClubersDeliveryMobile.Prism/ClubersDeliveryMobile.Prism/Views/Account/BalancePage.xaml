@@ -1,0 +1,177 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="ClubersDeliveryMobile.Prism.Views.BalancePage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:dg="clr-namespace:Xamarin.Forms.DataGrid;assembly=Xamarin.Forms.DataGrid"
+    xmlns:prism="http://prismlibrary.com"
+    Title="{Binding Title}"
+    prism:ViewModelLocator.AutowireViewModel="True"
+    Visual="Material">
+    <StackLayout>
+        <StackLayout Padding="10" Spacing="0">
+            <Frame
+                Padding="0"
+                BackgroundColor="White"
+                BorderColor="DarkSlateGray"
+                CornerRadius="0">
+                <StackLayout>
+                    <Frame
+                        Padding="0"
+                        BackgroundColor="White"
+                        BorderColor="DarkSlateGray"
+                        CornerRadius="0"
+                        HeightRequest="110">
+                        <Grid Padding="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2.8*" />
+                                <ColumnDefinition Width="2.9*" />
+                                <ColumnDefinition Width="2.3*" />
+                                <ColumnDefinition Width="2*" />
+                            </Grid.ColumnDefinitions>
+                            <Label
+                                Grid.Column="0"
+                                Margin="5,0,5,0"
+                                FontSize="Micro"
+                                HorizontalOptions="Center"
+                                Text="CONCEPTO"
+                                VerticalOptions="Center" />
+                            <Label
+                                Grid.Column="1"
+                                Margin="5,0,5,0"
+                                FontSize="Micro"
+                                HorizontalOptions="Center"
+                                Text="MIS GANANCIAS Y COBROS DE COMISIONES"
+                                VerticalOptions="Center" />
+                            <Label
+                                Grid.Column="2"
+                                Margin="5,0,5,0"
+                                FontSize="Micro"
+                                HorizontalOptions="Center"
+                                Text="MIS ADEUDOS Y DEPOSITOS A CLUBERS"
+                                VerticalOptions="Center" />
+                            <Label
+                                Grid.Column="3"
+                                Margin="5,0,5,0"
+                                FontSize="Micro"
+                                HorizontalOptions="Center"
+                                Text="SALDO"
+                                VerticalOptions="Center" />
+                            <BoxView
+                                Grid.Column="0"
+                                BackgroundColor="DarkSlateGray"
+                                HorizontalOptions="EndAndExpand"
+                                VerticalOptions="FillAndExpand"
+                                WidthRequest="1" />
+                            <BoxView
+                                Grid.Column="1"
+                                BackgroundColor="DarkSlateGray"
+                                HorizontalOptions="EndAndExpand"
+                                VerticalOptions="FillAndExpand"
+                                WidthRequest="1" />
+                            <BoxView
+                                Grid.Column="2"
+                                BackgroundColor="DarkSlateGray"
+                                HorizontalOptions="EndAndExpand"
+                                VerticalOptions="FillAndExpand"
+                                WidthRequest="1" />
+                            <BoxView
+                                Grid.Column="3"
+                                BackgroundColor="DarkSlateGray"
+                                HorizontalOptions="EndAndExpand"
+                                VerticalOptions="FillAndExpand"
+                                WidthRequest="1" />
+                        </Grid>
+                    </Frame>
+                    <ListView
+                        GroupDisplayBinding="{Binding Key, StringFormat='{0:dddd d MMMM, yyyy}'}"
+                        HasUnevenRows="False"
+                        IsGroupingEnabled="true"
+                        ItemsSource="{Binding TransactionsGrouped}"
+                        SelectionMode="None"
+                        SeparatorVisibility="None">
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Frame
+                                        Padding="0"
+                                        BorderColor="DarkSlateGray"
+                                        CornerRadius="0">
+                                        <Grid Padding="0" RowSpacing="0">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="2.8*" />
+                                                <ColumnDefinition Width="2.9*" />
+                                                <ColumnDefinition Width="2.3*" />
+                                                <ColumnDefinition Width="2*" />
+                                            </Grid.ColumnDefinitions>
+                                            <Label
+                                                Grid.Column="0"
+                                                Margin="10,0,10,0"
+                                                FontSize="Micro"
+                                                Text="{Binding Concept}"
+                                                VerticalOptions="Center" />
+                                            <Label
+                                                Grid.Column="1"
+                                                Margin="10,0,10,0"
+                                                FontSize="Micro"
+                                                Text="{Binding CommissionAmount}"
+                                                VerticalOptions="Center" />
+                                            <Label
+                                                Grid.Column="2"
+                                                Margin="10,0,10,0"
+                                                FontSize="Micro"
+                                                Text="{Binding ChargeAmount}"
+                                                VerticalOptions="Center" />
+                                            <Label
+                                                Grid.Column="3"
+                                                Margin="10,0,10,0"
+                                                FontSize="Micro"
+                                                Text="{Binding Amount}"
+                                                VerticalOptions="Center" />
+                                            <BoxView
+                                                Grid.Column="0"
+                                                BackgroundColor="DarkSlateGray"
+                                                HorizontalOptions="EndAndExpand"
+                                                VerticalOptions="FillAndExpand"
+                                                WidthRequest="1" />
+                                            <BoxView
+                                                Grid.Column="1"
+                                                BackgroundColor="DarkSlateGray"
+                                                HorizontalOptions="EndAndExpand"
+                                                VerticalOptions="FillAndExpand"
+                                                WidthRequest="1" />
+                                            <BoxView
+                                                Grid.Column="2"
+                                                BackgroundColor="DarkSlateGray"
+                                                HorizontalOptions="EndAndExpand"
+                                                VerticalOptions="FillAndExpand"
+                                                WidthRequest="1" />
+                                            <BoxView
+                                                Grid.Column="3"
+                                                BackgroundColor="DarkSlateGray"
+                                                HorizontalOptions="EndAndExpand"
+                                                VerticalOptions="FillAndExpand"
+                                                WidthRequest="1" />
+                                        </Grid>
+                                    </Frame>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackLayout>
+            </Frame>
+        </StackLayout>
+        <BoxView
+            Grid.Row="1"
+            Grid.ColumnSpan="2"
+            Margin="10,0,10,0"
+            HeightRequest="1"
+            HorizontalOptions="FillAndExpand"
+            Color="{StaticResource cluberspink}" />
+        <StackLayout Padding="10">
+            <Label Text="Comisiones a recibir: $_ _ _ _" />
+            <Label Text="Saldo a depositar: $_ _ _ _" />
+        </StackLayout>
+    </StackLayout>
+</ContentPage>

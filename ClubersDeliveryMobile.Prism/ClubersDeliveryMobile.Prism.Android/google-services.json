@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "719954879049",
+    "firebase_url": "https://clubers-278716.firebaseio.com",
+    "project_id": "clubers-278716",
+    "storage_bucket": "clubers-278716.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:719954879049:android:d353432e0836e348eb1598",
+        "android_client_info": {
+          "package_name": "com.clubers.repartidor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "719954879049-cjq8kbpkfu08pp2hjm6bdirj2jumh4ie.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD3zBjXVWyf06JhazPQqt-16R0Ob3vjWFE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "719954879049-cjq8kbpkfu08pp2hjm6bdirj2jumh4ie.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

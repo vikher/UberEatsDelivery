@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="ClubersDeliveryMobile.Prism.Views.DeliveryProblemPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:prism="http://prismlibrary.com"
+    ios:Page.UseSafeArea="true"
+    prism:ViewModelLocator.AutowireViewModel="True"
+    Visual="Material">
+    <StackLayout>
+        <Label
+            FontAttributes="Bold"
+            HorizontalTextAlignment="Center"
+            Text="¿Tiene un problema con la entrega?" />
+        <Label
+            x:Name="PhoneNumberIcon"
+            FontFamily="{StaticResource MaterialFontFamily}"
+            FontSize="Large"
+            HeightRequest="60"
+            HorizontalTextAlignment="Center"
+            VerticalTextAlignment="Center" />
+        <Label HorizontalTextAlignment="Center" Text="Contacte al cliente si no puede encontrar su dirección o  entregar el pedido" />
+        <Button HorizontalOptions="Center" Text="Contactar cliente" />
+        <Button
+            Command="{Binding ReportProblemCommand}"
+            HorizontalOptions="Center"
+            Text="Reportar problema" />
+    </StackLayout>
+</ContentPage>

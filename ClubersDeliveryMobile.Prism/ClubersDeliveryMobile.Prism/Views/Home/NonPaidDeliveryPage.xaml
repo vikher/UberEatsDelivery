@@ -1,0 +1,289 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="ClubersDeliveryMobile.Prism.Views.NonPaidDeliveryPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:Xam.Plugin.SimpleBottomDrawer;assembly=Xam.Plugin.SimpleBottomDrawer"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:local="clr-namespace:ClubersDeliveryMobile.Prism.Converters"
+    xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
+    xmlns:prism="http://prismlibrary.com"
+    Title="{Binding Title}"
+    ios:Page.UseSafeArea="true"
+    prism:ViewModelLocator.AutowireViewModel="True"
+    Visual="Material">
+    <Page.Resources>
+        <local:OrderTypeValueConverter x:Key="OrderTypeValueConverter" />
+        <local:OrderStatusToStringValueConverter x:Key="OrderStatusToStringValueConverter" />
+    </Page.Resources>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:InverseBoolConverter x:Key="InverseBool" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <NavigationPage.TitleView>
+        <StackLayout Orientation="Horizontal">
+            <Button
+                Command="{Binding NavigateToEstablishmentCommand}"
+                HorizontalOptions="EndAndExpand"
+                Text="Navegar" />
+        </StackLayout>
+    </NavigationPage.TitleView>
+
+    <AbsoluteLayout>
+        <RelativeLayout
+            AbsoluteLayout.LayoutBounds="0,0,1,1"
+            AbsoluteLayout.LayoutFlags="All"
+            BackgroundColor="Blue">
+
+            <StackLayout BackgroundColor="Red" HorizontalOptions="CenterAndExpand">
+                <maps:Map
+                    x:Name="MyMap"
+                    HeightRequest="900"
+                    MapType="Street"
+                    WidthRequest="500" />
+            </StackLayout>
+            <ContentView
+                BackgroundColor="#222222"
+                IsVisible="{Binding IsExpanded}"
+                Opacity="{Binding OverlayOpacity}"
+                RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                       Property=Height,
+                                                                       Factor=1,
+                                                                       Constant=0}"
+                RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                      Property=Width,
+                                                                      Factor=1,
+                                                                      Constant=0}">
+                <ContentView.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding BackgroundClicked}" />
+                </ContentView.GestureRecognizers>
+            </ContentView>
+            <controls:BottomDrawer
+                Padding="5,0"
+                BackgroundColor="WhiteSmoke"
+                ExpandedPercentage="{Binding ExpandedPercentage}"
+                IsExpanded="{Binding IsExpanded}"
+                IsVisible="{Binding IsVisible}"
+                RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                       Property=Height,
+                                                                       Factor=1,
+                                                                       Constant=0}"
+                RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                      Property=Width,
+                                                                      Factor=1,
+                                                                      Constant=0}"
+                RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                  Property=Height,
+                                                                  Factor=1,
+                                                                  Constant=-65}">
+                <StackLayout Spacing="0">
+                    <BoxView
+                        Margin="20,10,20,6"
+                        BackgroundColor="{StaticResource secondary_text}"
+                        CornerRadius="5"
+                        HeightRequest="3"
+                        HorizontalOptions="Center"
+                        WidthRequest="80" />
+                    <Grid ColumnDefinitions="*,Auto">
+                        <StackLayout Margin="0,0,-50,22" Padding="10,0">
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="Subtitle"
+                                HorizontalTextAlignment="Center"
+                                Text="{Binding Order.Customer.Name}" />
+                            <Label
+                                Margin="50,0,50,0"
+                                FontSize="12"
+                                HorizontalTextAlignment="Center"
+                                Text="{Binding Order.Establishment.Address}" />
+                        </StackLayout>
+                        <Label
+                            Grid.Column="1"
+                            Margin="0,5,10,0"
+                            FontFamily="{StaticResource MaterialFontFamily}"
+                            FontSize="35"
+                            HeightRequest="10"
+                            HorizontalTextAlignment="Center"
+                            Text="{Binding ChatIcon}"
+                            TextColor="{StaticResource cluberspink}"
+                            VerticalTextAlignment="Start">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ChatCommand}" />
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </Grid>
+                    <StackLayout Margin="0,5,0,0" Padding="10,0">
+                        <Frame
+                            Padding="13,0,20,0"
+                            BorderColor="{StaticResource cluberspink}"
+                            CornerRadius="13"
+                            HasShadow="False"
+                            HeightRequest="50">
+                            <StackLayout VerticalOptions="Center">
+                                <Grid
+                                    Grid.Row="2"
+                                    Margin="0"
+                                    Padding="0"
+                                    ColumnDefinitions="50, Auto, *"
+                                    RowDefinitions="Auto"
+                                    RowSpacing="0"
+                                    VerticalOptions="Center">
+                                    <Image
+                                        Margin="0"
+                                        Source="{Binding Order.ConsumptionTypeName, Converter={StaticResource OrderTypeValueConverter}}"
+                                        VerticalOptions="Center" />
+                                    <StackLayout
+                                        Grid.Column="1"
+                                        Orientation="Horizontal"
+                                        VerticalOptions="Center">
+                                        <Frame
+                                            Margin="10,0,0,0"
+                                            Padding="0"
+                                            BackgroundColor="Black"
+                                            CornerRadius="9"
+                                            VerticalOptions="Center"
+                                            WidthRequest="63">
+                                            <Label
+                                                Padding="5,3,5,3"
+                                                FontSize="Micro"
+                                                HorizontalTextAlignment="Center"
+                                                Text="{Binding Order.ConsumptionTypeName, Converter={StaticResource OrderStatusToStringValueConverter}}"
+                                                TextColor="White"
+                                                VerticalOptions="Center" />
+                                        </Frame>
+                                        <Label
+                                            Padding="6,3"
+                                            Text="{Binding Order.OrderId, StringFormat='#{0}'}"
+                                            VerticalOptions="Center" />
+                                    </StackLayout>
+                                    <Label
+                                        Grid.Column="2"
+                                        HorizontalOptions="EndAndExpand"
+                                        HorizontalTextAlignment="End"
+                                        Text="Pago pendiente"
+                                        TextColor="{StaticResource cluberspink}"
+                                        VerticalOptions="Center" />
+                                </Grid>
+                            </StackLayout>
+                        </Frame>
+                        <Button
+                            Margin="0,3"
+                            Command="{Binding ArrivedCommand}"
+                            IsVisible="{Binding IsEndDeliveryVisible, Converter={StaticResource InverseBool}}"
+                            Text="Llegué al domicilio" />
+                        <Frame
+                            Padding="15,15"
+                            CornerRadius="15"
+                            HasShadow="False">
+                            <CollectionView HeightRequest="100" ItemsSource="{Binding Products}">
+                                <CollectionView.ItemsLayout>
+                                    <GridItemsLayout Orientation="Vertical" VerticalItemSpacing="5" />
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid ColumnDefinitions="60, *,Auto" RowDefinitions="Auto,Auto">
+                                            <Label
+                                                Padding="19,0,0,0"
+                                                FontSize="15"
+                                                Text="{Binding Quantity, StringFormat='{0}'}"
+                                                TextColor="{StaticResource cluberspink}" />
+                                            <Label
+                                                Grid.Column="1"
+                                                FontSize="15"
+                                                LineBreakMode="TailTruncation"
+                                                Text="{Binding Name}" />
+
+                                            <Label
+                                                Grid.Column="2"
+                                                Padding="0,0,8,0"
+                                                Text="{Binding Subtotal, StringFormat='{}{0:C0}'}"
+                                                TextColor="{StaticResource cluberspink}" />
+                                            <BoxView
+                                                Grid.Row="1"
+                                                Grid.ColumnSpan="3"
+                                                Margin="0,5,0,5"
+                                                HeightRequest="1"
+                                                HorizontalOptions="FillAndExpand"
+                                                Color="LightGray" />
+                                        </Grid>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </Frame>
+                        <Frame
+                            Padding="15,10"
+                            CornerRadius="15"
+                            HasShadow="False"
+                            HeightRequest="20">
+                            <Grid
+                                ColumnDefinitions="60, *,Auto"
+                                RowDefinitions="Auto"
+                                VerticalOptions="Center">
+                                <Label
+                                    Grid.Column="1"
+                                    FontSize="15"
+                                    LineBreakMode="TailTruncation"
+                                    Text="Envío"
+                                    VerticalOptions="Center" />
+                                <Label
+                                    Grid.Column="2"
+                                    Padding="0,0,8,0"
+                                    Text="{Binding Order.DeliveryFee, StringFormat='{}{0:C0}'}"
+                                    TextColor="{StaticResource cluberspink}"
+                                    VerticalOptions="Center" />
+                            </Grid>
+                        </Frame>
+                        <Frame
+                            Padding="15,10"
+                            CornerRadius="15"
+                            HasShadow="False"
+                            HeightRequest="20">
+                            <Grid
+                                ColumnDefinitions="60, *,Auto"
+                                RowDefinitions="Auto"
+                                VerticalOptions="Center">
+                                <Label
+                                    Grid.Column="1"
+                                    FontSize="15"
+                                    LineBreakMode="TailTruncation"
+                                    Text="Total a cobrar"
+                                    VerticalOptions="Center" />
+                                <Label
+                                    Grid.Column="2"
+                                    Padding="0,0,8,0"
+                                    Text="{Binding Order.Total, StringFormat='{}{0:C0}'}"
+                                    TextColor="{StaticResource cluberspink}"
+                                    VerticalOptions="Center" />
+                            </Grid>
+                        </Frame>
+                    </StackLayout>
+
+                    <StackLayout
+                        Margin="0,5,0,20"
+                        Padding="10"
+                        Orientation="Horizontal">
+                        <Button
+                            Command="{Binding DeliveryProblemCommand}"
+                            IsVisible="{Binding IsEndDeliveryVisible}"
+                            Text="!"
+                            WidthRequest="5" />
+                        <Button
+                            Command="{Binding FinishDeliveryCommand}"
+                            IsVisible="{Binding IsEndDeliveryVisible}"
+                            Text="Finalizar pedido" />
+                    </StackLayout>
+                </StackLayout>
+            </controls:BottomDrawer>
+
+        </RelativeLayout>
+        <ActivityIndicator
+            AbsoluteLayout.LayoutBounds=".5,.5,.5,.5"
+            AbsoluteLayout.LayoutFlags="All"
+            HorizontalOptions="Center"
+            IsRunning="{Binding IsRunning}"
+            IsVisible="{Binding IsRunning}"
+            VerticalOptions="Center"
+            Color="{StaticResource cluberspink}" />
+    </AbsoluteLayout>
+</ContentPage>
